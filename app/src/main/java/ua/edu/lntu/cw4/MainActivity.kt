@@ -111,10 +111,6 @@ fun PageWithText(navController: NavHostController, number: MutableState<Int>) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(onClick = { navController.navigate("screen1") }) {
-            Text("Повернутися")
-        }
-
         Spacer(modifier = Modifier.height(16.dp))
 
         Text("Number is ${number.value}")
