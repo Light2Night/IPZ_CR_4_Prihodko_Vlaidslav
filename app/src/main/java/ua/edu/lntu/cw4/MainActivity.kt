@@ -48,7 +48,7 @@ fun Body() {
             MainPage(navController)
         }
         composable("screen2") {
-            MainPage(navController)
+            PageWithText(navController)
         }
     }
 }
@@ -64,6 +64,21 @@ fun MainPage(navController: NavHostController) {
             Button(onClick = { navController.navigate("screen2") }) {
                 Text("Перейти на сторінку ${i}")
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+@Composable
+fun PageWithText(navController: NavHostController) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Button(onClick = { navController.navigate("screen1") }) {
+            Text("Повернутися")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
