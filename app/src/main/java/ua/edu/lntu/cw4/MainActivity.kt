@@ -46,8 +46,10 @@ fun Body() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(onClick = { }) {
-            Text("Перейти до сторінки ${1}")
+        for (i in 1 until 11) {
+            Button(onClick = { }) {
+                Text("Перейти до сторінки ${i}")
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
