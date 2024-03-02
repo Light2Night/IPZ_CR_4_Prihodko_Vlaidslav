@@ -8,10 +8,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -42,17 +50,36 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Body() {
     val navController = rememberNavController()
     val number = rememberSaveable { mutableStateOf(0) }
-
-    NavHost(navController = navController, startDestination = "screen1") {
-        composable("screen1") {
-            MainPage(navController, number)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Повернутися на головну сторінку") },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.navigate("screen1")
+                    }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Назад")
+                    }
+                }
+            )
         }
-        composable("screen2") {
-            PageWithText(navController, number)
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "screen1",
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("screen1") {
+                MainPage(navController, number)
+            }
+            composable("screen2") {
+                PageWithText(navController, number)
+            }
         }
     }
 }
