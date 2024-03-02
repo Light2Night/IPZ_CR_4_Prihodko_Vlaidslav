@@ -13,6 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,26 +45,30 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Body() {
     val navController = rememberNavController()
+    val number = rememberSaveable { mutableStateOf(0) }
 
     NavHost(navController = navController, startDestination = "screen1") {
         composable("screen1") {
-            MainPage(navController)
+            MainPage(navController, number)
         }
         composable("screen2") {
-            PageWithText(navController)
+            PageWithText(navController, number)
         }
     }
 }
 
 @Composable
-fun MainPage(navController: NavHostController) {
+fun MainPage(navController: NavHostController, number: MutableState<Int>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         for (i in 1 until 11) {
-            Button(onClick = { navController.navigate("screen2") }) {
+            Button(onClick = {
+                number.value = i
+                navController.navigate("screen2")
+            }) {
                 Text("Перейти на сторінку ${i}")
             }
         }
@@ -71,7 +78,7 @@ fun MainPage(navController: NavHostController) {
 }
 
 @Composable
-fun PageWithText(navController: NavHostController) {
+fun PageWithText(navController: NavHostController, number: MutableState<Int>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,6 +89,8 @@ fun PageWithText(navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        Text("Number is ${number.value}")
     }
 }
 
