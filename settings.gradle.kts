@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "IPZ_CR_4"
+rootProject.name = "PrihodkoVladislav_4"
 include(":app")
  
