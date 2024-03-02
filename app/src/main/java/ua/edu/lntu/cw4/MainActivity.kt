@@ -61,7 +61,7 @@ fun MainPage(navController: NavHostController) {
             .padding(16.dp)
     ) {
         for (i in 1 until 11) {
-            Button(onClick = { }) {
+            Button(onClick = { navController.navigate("screen2") }) {
                 Text("Перейти на сторінку ${i}")
             }
         }
