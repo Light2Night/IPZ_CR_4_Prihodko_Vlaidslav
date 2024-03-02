@@ -6,20 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import ua.edu.lntu.cw4.ui.theme.IPZ_CR_4Theme
 
 class MainActivity : ComponentActivity() {
@@ -41,6 +41,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Body() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "screen1") {
+        composable("screen1") {
+            MainPage(navController)
+        }
+        composable("screen2") {
+            MainPage(navController)
+        }
+    }
+}
+
+@Composable
+fun MainPage(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +62,7 @@ fun Body() {
     ) {
         for (i in 1 until 11) {
             Button(onClick = { }) {
-                Text("Перейти до сторінки ${i}")
+                Text("Перейти на сторінку ${i}")
             }
         }
 
