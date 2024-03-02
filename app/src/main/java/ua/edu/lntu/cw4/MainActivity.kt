@@ -55,10 +55,11 @@ class MainActivity : ComponentActivity() {
 fun Body() {
     val navController = rememberNavController()
     val number = rememberSaveable { mutableStateOf(0) }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Повернутися на головну сторінку") },
+                title = { Text(text = "На головну сторінку") },
                 navigationIcon = {
                     IconButton(onClick = {
                         navController.navigate("screen1")
